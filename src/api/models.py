@@ -84,3 +84,21 @@ class Media_spot(db.Model):
             "url": self.url,
             "media_type": self.media_type,
         }
+    
+    # ---------------------MODELO COMMENT--------------------
+
+    class Comment (db.Model):
+        comment_id: Mapped[int] = mapped_column(primary_key= True)
+        user_id: Mapped[int] = mapped_column(nullable=False) #Fk
+        spot_id: Mapped[int] = mapped_column(nullable=False) #FK
+        ranking: Mapped[int] = mapped_column(nullable=True)
+        comment_text: Mapped[str] = mapped_column(nullable=False)
+
+    def serialize(self):
+        return {
+            "comment_id": self.comment_id,
+            "user_id": self.user_id,
+            "spot_id": self.spot_id,
+            "ranking": self.ranking,
+            "comment_text": self.comment_id
+        }
