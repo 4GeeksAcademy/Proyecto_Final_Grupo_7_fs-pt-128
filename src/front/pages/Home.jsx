@@ -52,7 +52,7 @@ export const Home = () => {
 					<li className="nav-item">
 						<button
 							className={`nav-link text-white fw-semibold ${activeTab === "blog" ? "border-bottom border-3" : ""}`}
-							onClick={() => setActiveTab("blog")}>Blog / Guía</button>
+							onClick={() => setActiveTab("blog")}>Guía</button>
 					</li>
 				</ul>
 			</div>

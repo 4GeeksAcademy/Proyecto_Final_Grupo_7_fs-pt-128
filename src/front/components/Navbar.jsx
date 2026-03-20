@@ -24,28 +24,28 @@ export const Navbar = () => {
 
 	return (
 		<>
-				<nav className="navbar navbar-expand-md w-100 mt-auto bg-dark">
-					<div className="container-fluid">
-						<Link to="/" className="navbar-brand text-white"><i className="fa-solid fa-van-shuttle fa-lg"></i></Link>
+			<nav className="navbar navbar-expand-md w-100 mt-auto bg-dark">
+				<div className="container-fluid">
+					<Link to="/" className="navbar-brand text-white"><i className="fa-solid fa-van-shuttle"></i></Link>
 
-				</div>
 					<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
 						<span className="navbar-toggler-icon"></span>
 					</button>
 
 					<div className="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul className="navbar-nav mb-2 mb-md-0">
-							<li className="nav-item "><Link className="nav-link text-white fw-semibold" to="/vans">Rent</Link></li>
-							<li className="nav-item"><Link className="nav-link text-white fw-semibold" to="/map">Mapa</Link></li>
+							<li className="nav-item "><Link className="nav-link text-white" to="/vans">Alquilar</Link></li>
+							<li className="nav-item"><Link className="nav-link text-white" to="/map">Mapa</Link></li>
 						</ul>
 						<div className="d-flex ms-auto">
 							{isLogin ? (
 								<div className="dropdown">
 									<button
-										className="btn btn-success px-4 py-2 fw-bold rounded-pill dropdown-toggle d-flex align-items-center gap-2"
+										className="btn px-4 py-2 fw-bold rounded-pill dropdown-toggle d-flex align-items-center gap-2"
 										type="button"
 										data-bs-toggle="dropdown"
 										aria-expanded="false"
+										style={{color: "#1b2e22"}}
 									>
 										<i className="fa-solid fa-user"></i>
 										{store.user?.user_name}
@@ -99,7 +99,8 @@ export const Navbar = () => {
 							) : (
 								<div className="d-flex gap-2">
 									<Link to="/signup">
-										<button className="btn btn-success px-5 py-2 fw-bold rounded-pill">Registrate</button>
+										<button className="btn btn-success px-5 py-2 fw-bold rounded-pill"
+										>Registrate</button>
 									</Link>
 									<Link to="/login">
 										<button className="btn btn-success px-5 py-2 fw-bold rounded-pill">Ingresar</button>
@@ -108,6 +109,7 @@ export const Navbar = () => {
 							)}
 						</div>
 					</div>
+				</div>
 
 			</nav>
 		</>
