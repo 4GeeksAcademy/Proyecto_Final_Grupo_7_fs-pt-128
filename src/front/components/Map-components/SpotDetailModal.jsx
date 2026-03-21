@@ -107,6 +107,7 @@ export const SpotDetailModal = ({ spotId, externalData, onClose, onSuccess, allS
     const handleAction = async () => {
         if (!isAuthenticated) return;
         setErrorMessage("");
+
         if (isNewManualSpot && !name.trim()) {
             setErrorMessage("⚠️ El nombre es obligatorio.");
             return;
@@ -122,8 +123,18 @@ export const SpotDetailModal = ({ spotId, externalData, onClose, onSuccess, allS
 
         if (isExternal) {
             const result = await createSpot(data);
-            if (result) {
-                alert("¡Lugar guardado!");
+
+            if (result && result.spot_id) {
+                if (newComment.trim() !== "") {
+                    await createComment(result.spot_id, newComment, newRating);
+                }
+
+                alert("¡Lugar y reseña guardados!");
+
+                setNewComment("");
+                setNewRating(5);
+                setImageUrl("");
+
                 if (onSuccess) await onSuccess();
                 if (onOpenDetail) onOpenDetail(`db-${result.spot_id}`);
             }
@@ -199,7 +210,7 @@ export const SpotDetailModal = ({ spotId, externalData, onClose, onSuccess, allS
                                     <img src={imageUrl || spot?.media?.[0]?.url} className="img-fluid w-100" style={{ height: '300px', objectFit: 'cover' }} alt="Lugar" />
                                 ) : (
                                     <div className="bg-light d-flex flex-column align-items-center justify-content-center" style={{ height: '200px' }}>
-                                        <span style={{ fontSize: '3rem' }}>{isNewManualSpot ? '🆕' : '📷'}</span>
+                                        <span style={{ fontSize: '3rem' }}>{isNewManualSpot ? '🆕 Nuevo sitio' : '📷 Sin imagenes'}</span>
                                     </div>
                                 )}
 
@@ -277,6 +288,7 @@ export const SpotDetailModal = ({ spotId, externalData, onClose, onSuccess, allS
                                             placeholder="Nombre del sitio..."
                                             value={name}
                                             onChange={e => setName(e.target.value)}
+                                            onFocus={() => { if (name === "Nuevo sitio") setName("") }}
                                             autoFocus
                                         />
                                     ) : (
@@ -292,6 +304,11 @@ export const SpotDetailModal = ({ spotId, externalData, onClose, onSuccess, allS
                                                 placeholder="Escribe la dirección o ubicación..."
                                                 value={address}
                                                 onChange={e => setAddress(e.target.value)}
+                                                onFocus={(e) => {
+                                                    if (address === "Punto seleccionado en el mapa") {
+                                                        setAddress("");
+                                                    }
+                                                }}
                                             />
                                         </div>
                                     ) : (
@@ -318,13 +335,31 @@ export const SpotDetailModal = ({ spotId, externalData, onClose, onSuccess, allS
                                 <div className="row g-2 text-center mb-4">
                                     {[{ state: hasWater, setter: setHasWater, label: "💧 Agua" }, { state: hasWaste, setter: setHasWaste, label: "🗑️ Vaciado" }, { state: hasLight, setter: setHasLight, label: "⚡ Luz" }, { state: isSleepable, setter: setIsSleepable, label: "🚐 Pernocta" }].map((service, idx) => (
                                         <div className="col-3" key={idx}>
-                                            <div onClick={() => isNewManualSpot && service.setter(!service.state)} className={`p-2 rounded small ${service.state ? 'bg-success text-white fw-bold border border-success' : 'bg-light text-muted border'}`} style={{ cursor: isNewManualSpot ? 'pointer' : 'default' }}>{service.label}</div>
+                                            <div
+                                                onClick={() => (isNewManualSpot || isExternal) && service.setter(!service.state)}
+                                                className={`p-2 rounded small ${service.state ? 'bg-success text-white fw-bold border border-success' : 'bg-light text-muted border'}`}
+                                                style={{ cursor: (isNewManualSpot || isExternal) ? 'pointer' : 'default' }}
+                                            >
+                                                {service.label}
+                                            </div>
                                         </div>
                                     ))}
                                 </div>
 
                                 <h6 className="fw-bold small text-muted text-uppercase mb-2">Descripción</h6>
-                                {isNewManualSpot ? <textarea className="form-control bg-light mb-4 p-2 border-0" rows="2" value={description} onChange={e => { setDescription(e.target.value); autoGrow(e); }} placeholder="Describe el lugar..." /> : <div className="p-3 bg-light rounded mb-4 shadow-sm" style={{ whiteSpace: 'pre-wrap', fontSize: '0.9rem' }}>{description || "Sin descripción disponible."}</div>}
+                                {(isNewManualSpot || isExternal) ? (
+                                    <textarea
+                                        className="form-control bg-light mb-4 p-2 border-0"
+                                        rows="2"
+                                        value={description}
+                                        onChange={e => { setDescription(e.target.value); autoGrow(e); }}
+                                        placeholder="Describe el lugar o añade detalles..."
+                                    />
+                                ) : (
+                                    <div className="p-3 bg-light rounded mb-4 shadow-sm" style={{ whiteSpace: 'pre-wrap', fontSize: '0.9rem' }}>
+                                        {description || "Sin descripción disponible."}
+                                    </div>
+                                )}
 
 
                                 {isAuthenticated ? (

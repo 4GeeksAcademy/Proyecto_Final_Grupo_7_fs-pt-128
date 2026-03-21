@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom/dist"
+import { Outlet, useLocation } from "react-router-dom/dist"
 import ScrollToTop from "../components/ScrollToTop"
 import { Navbar } from "../components/Navbar"
 import { Footer } from "../components/Footer"
@@ -12,6 +12,8 @@ export const Layout = () => {
     const {store, dispatch} =useGlobalReducer()
     const[isLoading, setIsLoading]= useState(true)
     const [showWelcome, setShowWelcome] = useState(false)
+
+    const location = useLocation();
 
     useEffect (()=> {
         const initialize =async()=> {
@@ -48,7 +50,7 @@ export const Layout = () => {
         );
     }
     return (
-        <ScrollToTop>
+        <ScrollToTop location={location}>
             <Navbar />
                 <Outlet />
                 <WelcomeModal
