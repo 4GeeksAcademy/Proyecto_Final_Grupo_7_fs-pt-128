@@ -24,20 +24,26 @@ export const Navbar = () => {
 
 	return (
 		<>
-			<nav className="navbar navbar-expand-md bg-dark w-100">
+			<nav className="navbar navbar-expand-md navbar-dark bg-dark w-100">
 				<div className="container-fluid">
-					<Link to="/" className="navbar-brand text-white"><i className="fa-solid fa-van-shuttle fa-lg"></i></Link>
+					<Link to="/" className="navbar-brand d-flex align-items-center text-white gap-2">
+						<p className="text-white m-0">Vandoo</p>
+						<i className="fa-solid fa-van-shuttle"></i></Link>
 					<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
 						<span className="navbar-toggler-icon"></span>
 					</button>
 
 					<div className="collapse navbar-collapse" id="navbarSupportedContent">
-						<ul className="navbar-nav mb-2 mb-md-0 d-flex justify-content-center w-100 gap-5">
-							<li className="nav-item "><Link className="nav-link text-white" to="/vans">Alquiler</Link></li>
-							<div className="separator"></div>
-							<li className="nav-item"><Link className="nav-link text-white" to="/map">Mapa</Link></li>
-							<div className="separator"></div>
-							<li className="nav-item"><Link className="nav-link text-white" to="/blog">Guía</Link></li>
+						<ul className="navbar-nav mb-2 mb-md-0 d-flex justify-content-center w-100 gap-2 gap-md-5">
+							<li className="nav-item">
+								<Link className="nav-link text-white" to="/vans">Alquiler</Link>
+							</li>
+							<li className="nav-item">
+								<Link className="nav-link text-white" to="/map">Mapa</Link>
+							</li>
+							<li className="nav-item">
+								<Link className="nav-link text-white" to="/blog">Guía</Link>
+							</li>
 						</ul>
 						<div className="d-flex ms-auto">
 							{isLogin ? (

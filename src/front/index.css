@@ -272,3 +272,21 @@ mapbox-search-box:focus-within {
     animation-iteration-count: var(--fa-animation-iteration-count, infinite);
     animation-timing-function: var(--fa-animation-timing-function, cubic-bezier(.7, 0, .84, 1.11));
 }
+
+.button-container2 {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  overflow-x: auto;
+  position: absolute;
+  padding: 5px;
+  gap: 10px;
+  z-index: 100;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-sg-green) transparent;
+}
+
+.button-container2::-webkit-scrollbar-thumb:hover {
+  background: var(--color-sg-green);
+}
