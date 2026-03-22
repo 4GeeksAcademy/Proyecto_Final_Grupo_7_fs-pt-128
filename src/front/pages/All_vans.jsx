@@ -28,7 +28,7 @@ export const All_vans = () => {
                         TU PRÓXIMA AVENTURA EMPIEZA AQUÍ.
                     </h1>
                     <p className="lead mt-3 mx-auto" style={{ maxWidth: '600px' }}>
-                        En nuestro catalogo de furgontas, vas a encontrar la camper perfecta para tus nececidades.
+                        En nuestro catalogo de furgontas, vas a encontrar la camper perfecta para tus necesidades.
                     </p>
                 </div>
             </div>
