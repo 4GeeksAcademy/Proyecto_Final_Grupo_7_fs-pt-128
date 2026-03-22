@@ -24,19 +24,20 @@ export const Navbar = () => {
 
 	return (
 		<>
-				<nav className="navbar navbar-expand-md w-100 mt-auto bg-dark">
-					<div className="container-fluid">
-						<Link to="/" className="navbar-brand text-white"><i className="fa-solid fa-van-shuttle fa-lg"></i></Link>
-
-				</div>
+			<nav className="navbar navbar-expand-md bg-dark w-100">
+				<div className="container-fluid">
+					<Link to="/" className="navbar-brand text-white"><i className="fa-solid fa-van-shuttle fa-lg"></i></Link>
 					<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
 						<span className="navbar-toggler-icon"></span>
 					</button>
 
 					<div className="collapse navbar-collapse" id="navbarSupportedContent">
-						<ul className="navbar-nav mb-2 mb-md-0">
-							<li className="nav-item "><Link className="nav-link text-white fw-semibold" to="/vans">Rent</Link></li>
-							<li className="nav-item"><Link className="nav-link text-white fw-semibold" to="/map">Mapa</Link></li>
+						<ul className="navbar-nav mb-2 mb-md-0 d-flex justify-content-center w-100 gap-5">
+							<li className="nav-item "><Link className="nav-link text-white" to="/vans">Alquiler</Link></li>
+							<div className="separator"></div>
+							<li className="nav-item"><Link className="nav-link text-white" to="/map">Mapa</Link></li>
+							<div className="separator"></div>
+							<li className="nav-item"><Link className="nav-link text-white" to="/blog">Guía</Link></li>
 						</ul>
 						<div className="d-flex ms-auto">
 							{isLogin ? (
@@ -99,16 +100,16 @@ export const Navbar = () => {
 							) : (
 								<div className="d-flex gap-2">
 									<Link to="/signup">
-										<button className="btn btn-success px-5 py-2 fw-bold rounded-pill">Registrate</button>
+										<button className="btn btn-success py-2 fw-bold rounded-pill">Registrate</button>
 									</Link>
 									<Link to="/login">
-										<button className="btn btn-success px-5 py-2 fw-bold rounded-pill">Ingresar</button>
+										<button className="btn btn-success py-2 fw-bold rounded-pill">Ingresar</button>
 									</Link>
 								</div>
 							)}
 						</div>
 					</div>
-
+				</div>
 			</nav>
 		</>
 	);

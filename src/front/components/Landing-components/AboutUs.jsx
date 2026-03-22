@@ -71,7 +71,7 @@ export const AboutUs = () => {
             <hr className="my-5" />
             <h2 className="display-6">¿Listo para unirte?</h2>
             <p className="fs-4">Forma parte de esta comunidad compartiendo y descubriendo esos lugares desconocidos</p>
-            <div className="d-flex gap-3">
+            <div className="d-flex gap-3 mb-3">
                 <Link to={"/signup"}>
                     <button className="btn btn-success px-5 py-2 fw-bold rounded-pill">¡Registrate ya!</button>
                 </Link>

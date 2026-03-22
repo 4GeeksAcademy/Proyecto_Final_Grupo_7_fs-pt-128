@@ -42,7 +42,7 @@ export const VanCard = ({ van }) => {
               className="carousel-control-next"
               type="button"
               data-bs-target={`#carousel-${van.car_id}`}
-              data-bs-slide="prev"
+              data-bs-slide="next"
               onClick={(e) => {
                 e.preventDefault();
                 e.currentTarget.blur();
