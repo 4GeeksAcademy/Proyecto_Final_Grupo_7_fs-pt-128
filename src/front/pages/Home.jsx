@@ -18,7 +18,7 @@ export const Home = () => {
 					backgroundImage: 'linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url("https://i.imgur.com/l3Bb92y.jpeg")',
 					backgroundSize: 'cover',
 					backgroundPosition: 'center',
-					backgroundAttachment: 'scroll', 
+					backgroundAttachment: 'fixed', 
 					height: '550px',
 					width: '100%'
 				}}>
@@ -32,7 +32,7 @@ export const Home = () => {
 					}}>Vandoo</h1>
 				<p className="text-white fs-2 fst-italic fw-light"
 					style={{ textShadow: '2px 2px 10px rgba(0,0,0,0.8)' }}>
-					Menos hoteles, más estrellas
+					Menos hoteles, más estrellas...
 				</p>
 			</div>
 
