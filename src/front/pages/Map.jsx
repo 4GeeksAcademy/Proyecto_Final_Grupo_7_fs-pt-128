@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
+import { useLocation } from "react-router-dom";
 import mapboxgl from 'mapbox-gl';
 import { SearchBox } from '@mapbox/search-js-react';
 import { SearchBoxCore } from '@mapbox/search-js-core';
@@ -171,7 +172,6 @@ export const Map = () => {
       const target = e.originalEvent.target;
 
       if (target.closest('.mapboxgl-marker') || target.closest('.mapboxgl-popup')) {
-        console.log("Clic ignorado por estar sobre UI existente.");
         return;
       }
 
@@ -232,7 +232,35 @@ export const Map = () => {
     { label: "🛒 Supermercados", value: "supermarket" }
   ];
 
-  return (
+  const location = useLocation();
+  const hasInitialDetailOpened = useRef(false);
+
+  useEffect(() => {
+    const stateSpotId = location.state?.openSpotId;
+
+    if (stateSpotId && !hasInitialDetailOpened.current && stores.length > 0) {
+
+      const targetSpot = stores.find(s => `db-${s.spot_id || s.id}` === stateSpotId);
+
+      if (targetSpot && mapRef.current) {
+        hasInitialDetailOpened.current = true;
+
+        mapRef.current.flyTo({
+          center: [parseFloat(targetSpot.longitude), parseFloat(targetSpot.latitude)],
+          zoom: 14,
+          essential: true
+        });
+
+        mapRef.current.once('moveend', () => {
+          handleOpenDetail(stateSpotId);
+
+          window.history.replaceState({}, document.title);
+        });
+      }
+    }
+  }, [location.state, stores, handleOpenDetail]);
+
+  return ( 
     <div className="map-main-container">
       <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <Sidebar
@@ -384,7 +412,6 @@ export const Map = () => {
                 longitude: searchMarker.longitude,
                 latitude: searchMarker.latitude,
                 category: "search_pin",
-                // 2. Cambiamos el nombre dinámicamente si es duplicado
                 name: duplicateSpot
                   ? `📍 Ya guardado: ${duplicateSpot.name}`
                   : "Nueva ubicación encontrada"

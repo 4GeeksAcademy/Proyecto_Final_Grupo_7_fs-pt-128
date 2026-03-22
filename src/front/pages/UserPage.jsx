@@ -163,62 +163,69 @@ export const UserPage = () => {
                             </div>
                             <div className="col-12 col-md-6">
                                 <h4 className="userpage-section-title favoritos">
-                                    <i className="fa-solid fa-heart me-2 text-danger"></i>
+                                    <i className="fa-solid fa-heart me-2 text-success"></i> {/* Cambiado a text-success para tu verde */}
                                     Favoritos
                                 </h4>
                                 <div className="d-flex flex-column gap-3">
                                     {favSpots.length > 0 ? favSpots.map(spot => (
                                         <div className="userpage-card favorito" key={spot.spot_id}>
                                             <div className="row g-0 align-items-center">
-                                                <div className="col-4">
+                                                {/* COLUMNA IMAGEN: Ahora con la clase wrapper para que se vea igual que reservas */}
+                                                <div className="col-4 userpage-card-img-wrapper">
                                                     <img
                                                         src={spot.media?.[0]?.url || "https://via.placeholder.com/150"}
                                                         alt={spot.name}
+                                                        style={{ objectFit: 'cover', height: '100%' }}
                                                     />
                                                 </div>
+
+                                                {/* COLUMNA CUERPO: Con la clase body para dar el padding correcto */}
                                                 <div className="col-8 userpage-card-body">
                                                     <h6 className="userpage-card-title">{spot.name}</h6>
-                                                    <p className="userpage-card-info">
-                                                        <i className="fa-solid fa-location-dot me-1 text-danger"></i>
+                                                    <p className="userpage-card-info text-truncate">
+                                                        <i className="fa-solid fa-location-dot me-1 text-success"></i>
                                                         {spot.city || spot.address}
                                                     </p>
-                                                    <div className="d-flex justify-content-between align-items-center">
-                                                        <span className="badge bg-danger-subtle text-danger border border-danger-subtle rounded-pill">
-                                                            ⭐ {spot.rating || "Sin rating"}
+
+                                                    <div className="d-flex justify-content-between align-items-center mt-2">
+                                                        <span className="badge bg-success-subtle text-success border border-success-subtle rounded-pill">
+                                                            ⭐ {spot.rating || "5.0"}
                                                         </span>
-                                                        <button
-                                                            className="btn btn-sm btn-outline-success rounded-pill"
-                                                            onClick={() => navigate("/map", { state: { openSpotId: `db-${spot.spot_id}` } })}
-                                                        >
-                                                            <i className="fa-solid fa-map-location-dot me-1"></i>
-                                                            Ver
-                                                        </button>
-                                                        <button
-                                                            className="btn btn-sm btn-outline-danger rounded-pill"
-                                                            onClick={() => handleRemoveFavorite(spot.spot_id)}
-                                                        >
-                                                            <i className="fa-solid fa-heart-crack me-1"></i>
-                                                            Quitar
-                                                        </button>
+
+                                                        <div className="d-flex gap-2">
+                                                            <button
+                                                                className="userpage-detail-btn"
+                                                                onClick={() => navigate("/map", { state: { openSpotId: `db-${spot.spot_id}` } })}
+                                                            >
+                                                                <i className="fa-solid fa-eye me-1"></i>
+                                                                Ver
+                                                            </button>
+                                                            <button
+                                                                className="btn btn-sm btn-outline-danger rounded-pill"
+                                                                onClick={() => handleRemoveFavorite(spot.spot_id)}
+                                                            >
+                                                                <i className="fa-solid fa-trash-can"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+                                    )) : (
+                                        <div className="userpage-empty favoritos">
+                                            <i className="fa-solid fa-heart-crack fa-2x mb-3 d-block opacity-25"></i>
+                                            No tienes favoritos guardados todavía.
                                         </div>
-                                )) : (
-                                <div className="userpage-empty favoritos">
-                                    <i className="fa-solid fa-heart-crack fa-2x mb-3 d-block opacity-25"></i>
-                                    No tienes favoritos guardados todavía.
-                                </div>
                                     )}
+                                </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div >
+            </div >
 
-            { bookingToCancel && (
+            {bookingToCancel && (
                 <div className="userpage-modal-overlay">
                     <div className="userpage-modal-box">
                         <div className="userpage-modal-header">
@@ -252,12 +259,12 @@ export const UserPage = () => {
                     </div>
                 </div>
             )
-}
+            }
 
-<WelcomeModal
-    show={showEditModal}
-    onClose={() => setShowEditModal(false)}
-/>
+            <WelcomeModal
+                show={showEditModal}
+                onClose={() => setShowEditModal(false)}
+            />
         </>
     );
 };
