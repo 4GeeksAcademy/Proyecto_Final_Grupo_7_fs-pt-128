@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import useGlobalReducer from "../hooks/useGlobalReducer"
 import { getSingleVan } from "../services/vanServices"
 import DatePicker from "react-datepicker";
@@ -290,6 +290,23 @@ export const DetailsVan = () => {
                                                         {loginLoading ? "Cargando..." : "Entrar y Reservar"}
                                                     </button>
                                                 </form>
+                                                <div className="signup-login-link mt-3">
+                                                    ¿No tienes cuenta?{" "}
+                                                    <span
+                                                        className="text-primary fw-bold"
+                                                        style={{ cursor: 'pointer', textDecoration: 'underline' }}
+                                                        onClick={() => {
+                                                            const backdrops = document.querySelectorAll('.modal-backdrop');
+                                                            backdrops.forEach(backdrop => backdrop.remove());
+                                                            document.body.style.overflow = 'auto';
+                                                            document.body.classList.remove('modal-open');
+
+                                                            navigate("/signup");
+                                                        }}
+                                                    >
+                                                        Regístrate gratis
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

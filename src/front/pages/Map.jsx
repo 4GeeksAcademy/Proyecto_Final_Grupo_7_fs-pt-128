@@ -261,7 +261,7 @@ export const Map = () => {
   }, [location.state, stores, handleOpenDetail]);
 
   return (
-    <div className="container p-4">
+    
       <div className="map-main-container border-1 rounded-4 overflow-hidden shadow">
         <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
           <Sidebar
@@ -281,7 +281,7 @@ export const Map = () => {
         </div>
 
         <div className="map-wrapper" onClick={() => { if (isSidebarOpen) setIsSidebarOpen(false) }}>
-          <div className="button-container2">
+          <div className="button-container">
             <button
               onClick={(e) => {
                 e.stopPropagation();
@@ -435,6 +435,6 @@ export const Map = () => {
           )}
         </div>
       </div>
-    </div>
+    
   );
 };
