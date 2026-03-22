@@ -79,15 +79,15 @@ export const DetailsVan = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError("");
-        setLoginLoading(true); 
+        setLoginLoading(true);
 
         const response = await login(user);
-        
+
         if (response.token) {
             localStorage.setItem("token", response.token);
             dispatch({ type: "auth_login", payload: { token: response.token } });
             dispatch({ type: "auth_set_user", payload: response.user });
-            
+
             const closeButton = document.querySelector("#modalLoginAviso .btn-close");
             if (closeButton) closeButton.click();
         } else {
@@ -103,10 +103,16 @@ export const DetailsVan = () => {
     return (
         <>
             {loading ? (
-                <span className="d-flex aling-item-center justify-content-center vh-100">
-                    <span className="p-2"> Loading...</span>
-                    <span className="spinner-border p-2 flex-shrink-1" role="status"></span>
-                </span>
+                <div
+                    className="d-flex flex-column justify-content-center align-items-center"
+                    style={{ height: "100vh", backgroundColor: "#f8f9fa" }}
+                >
+                    <div className="text-success mb-3">
+                        <i className="fa-solid fa-van-shuttle fa-4x fa-bounce"></i>
+                    </div>
+                    <h4 className="fw-light text-secondary">Preparando la ruta...</h4>
+                    <div className="mt-2 text-muted small italic">Verificando tu equipaje...</div>
+                </div>
             ) : (
                 <div className="container mt-5 mb-5">
                     <div className="row g-3 mb-4">
@@ -241,8 +247,8 @@ export const DetailsVan = () => {
                                         </div>
                                     </div>
                                 </div>
-                                
-                        {/* ----------------- MODAL INICIAR SECIÓN----------------- */}
+
+                                {/* ----------------- MODAL INICIAR SECIÓN----------------- */}
                                 <div className="modal fade" id="modalLoginAviso" tabIndex="-1" aria-hidden="true">
                                     <div className="modal-dialog modal-dialog-centered">
                                         <div className="modal-content border-0 shadow">
@@ -288,13 +294,6 @@ export const DetailsVan = () => {
                                         </div>
                                     </div>
                                 </div>
-                                {/* <button
-                                    className={`btn w-100 border-2 ${store.fav_vans.some(item => item.id === van.id) ? 'btn-danger' : 'btn-outline-danger'}`}
-                                    onClick={handleFavVan}
-                                >
-                                    <i className={`${store.fav_vans.some(item => item.id === van.id) ? 'fa-solid' : 'fa-regular'} fa-heart me-2`}></i>
-                                    {store.fav_vans.some(item => item.id === van.id) ? 'En favoritos' : 'Añadir a favoritos'}
-                                </button> */}
                             </div>
                         </div>
                     </div>
