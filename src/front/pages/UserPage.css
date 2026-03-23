@@ -218,3 +218,28 @@
     gap: 10px;
     border: none;
 }
+.userpage-card-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.userpage-card-actions .userpage-detail-btn,
+.userpage-card-actions .btn {
+    flex: 1;
+    min-width: 80px;
+    text-align: center;
+    justify-content: center;
+}
+
+@media (max-width: 480px) {
+    .userpage-card-actions {
+        flex-direction: column;
+    }
+
+    .userpage-card-actions .userpage-detail-btn,
+    .userpage-card-actions .btn {
+        width: 100%;
+        text-align: center;
+    }
+}

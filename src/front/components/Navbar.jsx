@@ -49,7 +49,7 @@ export const Navbar = () => {
 							{isLogin ? (
 								<div className="dropdown">
 									<button
-										className="btn btn-success px-4 py-2 fw-bold rounded-pill dropdown-toggle d-flex align-items-center gap-2"
+										className="btn vandoo px-4 py-2 fw-bold rounded-pill dropdown-toggle d-flex align-items-center gap-2"
 										type="button"
 										data-bs-toggle="dropdown"
 										aria-expanded="false"
@@ -78,7 +78,7 @@ export const Navbar = () => {
 												onMouseEnter={e => e.currentTarget.style.background = "rgba(255,255,255,0.07)"}
 												onMouseLeave={e => e.currentTarget.style.background = "transparent"}
 											>
-												<i className="fa-solid fa-id-card text-success" style={{ width: "16px" }}></i>
+												<i className="fa-solid fa-id-card vandoo-text" style={{ width: "16px" }}></i>
 												Mi perfil
 											</Link>
 										</li>
@@ -106,10 +106,10 @@ export const Navbar = () => {
 							) : (
 								<div className="d-flex gap-2">
 									<Link to="/signup">
-										<button className="btn btn-success py-2 fw-bold rounded-pill">Registrate</button>
+										<button className="btn vandoo py-2 fw-bold rounded-pill">Registrate</button>
 									</Link>
 									<Link to="/login">
-										<button className="btn btn-success py-2 fw-bold rounded-pill">Ingresar</button>
+										<button className="btn vandoo py-2 fw-bold rounded-pill">Ingresar</button>
 									</Link>
 								</div>
 							)}

@@ -56,7 +56,7 @@ export const Footer = () => {
                 <div className="row text-center text-md-start">
 
                     <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-                        <h5 className="text-uppercase mb-4 fw-bold text-success">Vandoo</h5>
+                        <h5 className="text-uppercase mb-4 fw-bold vandoo-text">Vandoo</h5>
                         <p className="small text-secondary">
                             Redefiniendo los viajes en carretera. Menos hoteles, más estrellas bajo el cielo. Tu comunidad camper de confianza.
                         </p>
@@ -127,7 +127,7 @@ export const Footer = () => {
                     <div className="col-md-7 col-lg-8">
                         <p className="small text-secondary">
                             © {new Date().getFullYear()} Copyright:
-                            <strong className="text-success"> Vandoo.com</strong>
+                            <strong className="vandoo-text"> Vandoo.com</strong>
                         </p>
                     </div>
                 </div>

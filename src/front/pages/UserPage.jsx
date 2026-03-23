@@ -60,22 +60,22 @@ export const UserPage = () => {
                                     {store.user?.user_name || "usuario_camper"}
                                 </h2>
                                 <p className="userpage-info-item mb-1">
-                                    <i className="fa-solid fa-at me-2 text-success"></i>
+                                    <i className="fa-solid fa-at me-2 vandoo-text"></i>
                                     {store.user?.name || "Viajero"} {store.user?.last_name || ""}
                                 </p>
                                 <p className="userpage-info-item mb-1">
-                                    <i className="fa-solid fa-envelope me-2 text-success"></i>
+                                    <i className="fa-solid fa-envelope me-2 vandoo-text"></i>
                                     {store.user?.email}
                                 </p>
                                 {store.user?.phone && (
                                     <p className="userpage-info-item mb-1">
-                                        <i className="fa-solid fa-phone me-2 text-success"></i>
+                                        <i className="fa-solid fa-phone me-2 vandoo-text"></i>
                                         {store.user?.phone}
                                     </p>
                                 )}
                                 {store.user?.address && (
                                     <p className="userpage-info-item mb-0">
-                                        <i className="fa-solid fa-house me-2 text-success"></i>
+                                        <i className="fa-solid fa-house me-2 vandoo-text"></i>
                                         {store.user?.address}
                                     </p>
                                 )}
@@ -98,7 +98,7 @@ export const UserPage = () => {
                         <div className="row g-4">
                             <div className="col-12 col-md-6">
                                 <h4 className="userpage-section-title reservas">
-                                    <i className="fa-solid fa-calendar-check me-2 text-success"></i>
+                                    <i className="fa-solid fa-calendar-check me-2 vandoo-text"></i>
                                     Mis Reservas
                                 </h4>
                                 <div className="d-flex flex-column gap-3">
@@ -117,21 +117,21 @@ export const UserPage = () => {
                                                         {res.van_brand} {res.van_model}
                                                     </h6>
                                                     <p className="userpage-card-info">
-                                                        <i className="fa-solid fa-calendar-days me-1 text-success"></i>
+                                                        <i className="fa-solid fa-calendar-days me-1 vandoo-text"></i>
                                                         {res.start_date} → {res.end_date}
                                                     </p>
                                                     <p className="userpage-card-info">
-                                                        <i className="fa-solid fa-euro-sign me-1 text-success"></i>
+                                                        <i className="fa-solid fa-euro-sign me-1 vandoo-text"></i>
                                                         {res.total_price}€
                                                     </p>
                                                     <div className="d-flex justify-content-between align-items-center">
-                                                        <span className={`badge rounded-pill border ${res.status === "confirmed" ? "bg-success-subtle text-success border-success-subtle" :
+                                                        <span className={`badge rounded-pill border ${res.status === "confirmed" ? "bg-success-subtle vandoo-text border-success-subtle" :
                                                             res.status === "cancelled" ? "bg-danger-subtle text-danger border-danger-subtle" :
                                                                 "bg-warning-subtle text-warning border-warning-subtle"
                                                             }`}>
                                                             {res.status}
                                                         </span>
-                                                        <div className="d-flex gap-2">
+                                                        <div className="userpage-card-actions d-flex row">
                                                             <Link
                                                                 to={`/vans/${res.car_id}`}
                                                                 className="userpage-detail-btn"
@@ -144,8 +144,8 @@ export const UserPage = () => {
                                                                     className="btn btn-sm btn-outline-danger rounded-pill"
                                                                     onClick={() => setBookingToCancel(res.booking_id)}
                                                                 >
-                                                                    <i className="fa-solid fa-xmark me-1"></i>
-                                                                    Cancelar
+                                                                    <i className="fa-solid fa-trash-can"></i>
+                                                                    
                                                                 </button>
                                                             )}
                                                         </div>
@@ -163,14 +163,13 @@ export const UserPage = () => {
                             </div>
                             <div className="col-12 col-md-6">
                                 <h4 className="userpage-section-title favoritos">
-                                    <i className="fa-solid fa-heart me-2 text-success"></i> {/* Cambiado a text-success para tu verde */}
+                                    <i className="fa-solid fa-heart me-2 vandoo-text"></i> 
                                     Favoritos
                                 </h4>
                                 <div className="d-flex flex-column gap-3">
                                     {favSpots.length > 0 ? favSpots.map(spot => (
                                         <div className="userpage-card favorito" key={spot.spot_id}>
                                             <div className="row g-0 align-items-center">
-                                                {/* COLUMNA IMAGEN: Ahora con la clase wrapper para que se vea igual que reservas */}
                                                 <div className="col-4 userpage-card-img-wrapper">
                                                     <img
                                                         src={spot.media?.[0]?.url || "https://via.placeholder.com/150"}
@@ -178,21 +177,19 @@ export const UserPage = () => {
                                                         style={{ objectFit: 'cover', height: '100%' }}
                                                     />
                                                 </div>
-
-                                                {/* COLUMNA CUERPO: Con la clase body para dar el padding correcto */}
                                                 <div className="col-8 userpage-card-body">
                                                     <h6 className="userpage-card-title">{spot.name}</h6>
                                                     <p className="userpage-card-info text-truncate">
-                                                        <i className="fa-solid fa-location-dot me-1 text-success"></i>
+                                                        <i className="fa-solid fa-location-dot me-1 vandoo-text"></i>
                                                         {spot.city || spot.address}
                                                     </p>
 
                                                     <div className="d-flex justify-content-between align-items-center mt-2">
-                                                        <span className="badge bg-success-subtle text-success border border-success-subtle rounded-pill">
+                                                        <span className="badge bg-success-subtle vandoo-text border border-success-subtle rounded-pill">
                                                             ⭐ {spot.rating || "5.0"}
                                                         </span>
 
-                                                        <div className="d-flex gap-2">
+                                                        <div className="userpage-card-actions">
                                                             <button
                                                                 className="userpage-detail-btn"
                                                                 onClick={() => navigate("/map", { state: { openSpotId: `db-${spot.spot_id}` } })}
