@@ -230,16 +230,16 @@ mapbox-search-box:focus-within {
 
 .static-description-box {
   width: 100%;
-  min-height: 100px; /* Tamaño mínimo inicial */
-  max-height: 300px; /* Para que no rompa el modal si es gigante */
-  overflow-y: auto;  /* Scroll si el texto es muy largo */
-  background-color: #f8f9fa; /* Fondo gris suave para indicar "lectura" */
+  min-height: 100px; 
+  max-height: 300px; 
+  overflow-y: auto;  
+  background-color: #f8f9fa;
   border: 1px solid #dee2e6;
   border-radius: 8px;
   padding: 12px;
   font-size: 0.95rem;
   line-height: 1.5;
-  white-space: pre-wrap; /* Mantiene los saltos de línea */
+  white-space: pre-wrap; 
   color: #495057;
 }
 
@@ -262,5 +262,14 @@ mapbox-search-box:focus-within {
 .custom-popup-content button {
     position: relative;
     z-index: 9999;
+}
+
+.vandoo{
+  background-color: #2d6a4f;
+  color :white;
+}
+
+.vandoo-text{
+  color:#2d6a4f;
 }
 

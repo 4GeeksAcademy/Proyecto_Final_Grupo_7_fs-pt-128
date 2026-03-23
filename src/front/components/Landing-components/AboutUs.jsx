@@ -35,7 +35,7 @@ export const AboutUs = () => {
                     <div className="col-12 col-md-4" key={index}>
                         <div className="card h-100 border-0 shadow">
                             <div className="card-body text-center">
-                                <div className="fs-1 mb-3 text-success">
+                                <div className="fs-1 mb-3 vandoo-text">
                                     <i className={`fa-solid ${item.icon}`}></i>
                                 </div>
                                 <h5 className="card-title fw-bold">{item.title}</h5>
@@ -55,7 +55,7 @@ export const AboutUs = () => {
                     <div className="col-12 col-md-4" key={index}>
                         <div className="card h-100 border-0 shadow">
                             <div className="card-body text-center">
-                                <div className="fs-1 mb-3 text-success">
+                                <div className="fs-1 mb-3 vandoo-text">
                                     <i className={`fa-solid ${item.img}`}></i>
                                 </div>
                                 <h5 className="card-title fw-bold">{item.name}</h5>
@@ -73,10 +73,10 @@ export const AboutUs = () => {
             <p className="fs-4">Forma parte de esta comunidad compartiendo y descubriendo esos lugares desconocidos</p>
             <div className="d-flex gap-3">
                 <Link to={"/signup"}>
-                    <button className="btn btn-success px-5 py-2 fw-bold rounded-pill">¡Registrate ya!</button>
+                    <button className="btn vandoo px-5 py-2 fw-bold rounded-pill">¡Registrate ya!</button>
                 </Link>
                 <Link to={"/map"}>
-                    <button className="btn btn-success px-5 py-2 fw-bold rounded-pill">¡Explora el mapa!</button>
+                    <button className="btn vandoo px-5 py-2 fw-bold rounded-pill">¡Explora el mapa!</button>
                 </Link>
             </div>
         </>

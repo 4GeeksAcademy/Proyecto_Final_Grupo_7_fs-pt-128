@@ -33,7 +33,7 @@ export const Explore = () => {
                         <div className="col-12 col-md-6 col-lg-3" key={index}>
                             <div className="card h-100 border-0 shadow">
                                 <div className="card-body text-center">
-                                    <div className="fs-1 mb-3 text-success">
+                                    <div className="fs-1 mb-3 vandoo-text">
                                         <i className={`fa-solid ${item.icon}`}></i>
                                     </div>
                                     <h5 className="card-title fw-bold">{item.title}</h5>
@@ -60,7 +60,7 @@ export const Explore = () => {
                             <strong> gasolineras</strong> cercanas y <strong>campings</strong> con encanto.
                         </p>
                         <div>
-                            <Link to="/map" className="btn btn-success px-5 py-2 fw-bold rounded-pill">
+                            <Link to="/map" className="btn vandoo px-5 py-2 fw-bold rounded-pill">
                                 Abrir el Mapa
                             </Link>
                         </div>
@@ -73,7 +73,7 @@ export const Explore = () => {
                         <h2 className="fw-bold display-6">¿Necesitas una camper?</h2>
                         <p className="lead text-muted">Tenemos un gran catálogo a tu disposición para que empieces hoy mismo.</p>
                         <div>
-                            <Link to="/vans" className="btn btn-success px-5 py-2 fw-bold rounded-pill">Ver Catálogo</Link>
+                            <Link to="/vans" className="btn vandoo px-5 py-2 fw-bold rounded-pill">Ver Catálogo</Link>
                         </div>
                     </div>
                     <div className="col-md-6 mb-4 mb-md-0 order-1 order-md-2">

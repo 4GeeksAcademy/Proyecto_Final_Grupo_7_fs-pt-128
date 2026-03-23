@@ -46,7 +46,7 @@ export const VanCard = ({ van }) => {
           <div className="card-body">
             <div className="d-flex justify-content-between align-items-start">
               <div>
-                <h6 className="text-success fw-bold text-uppercase mb-1">{van.brand}</h6>
+                <h6 className="vandoo-text fw-bold text-uppercase mb-1">{van.brand}</h6>
                 <h5 className="card-title fw-bold">{van.model}</h5>
               </div>
             </div>

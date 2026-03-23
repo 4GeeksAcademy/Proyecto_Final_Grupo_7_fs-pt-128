@@ -25,7 +25,7 @@ export const Layout = () => {
     },[dispatch])
 
  useEffect(() => {
-    if (isLoading) return; // 👈 espera a que termine el loading
+    if (isLoading) return; 
     if (store.user && !store.user.user_name) {
         setShowWelcome(true);
     } else {

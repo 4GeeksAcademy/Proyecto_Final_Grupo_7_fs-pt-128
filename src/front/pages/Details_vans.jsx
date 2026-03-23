@@ -135,7 +135,7 @@ export const DetailsVan = () => {
                                         <h1 className="display-5 fw-bold text-uppercase mb-0">{van.brand}</h1>
                                         <h3 className="text-muted">{van.model}</h3>
                                     </div>
-                                    <span className={`badge ${van.available ? 'bg-success' : 'bg-danger'} p-2`}>
+                                    <span className={`badge ${van.available ? 'vandoo' : 'bg-danger'} p-2`}>
                                         {van.available ? 'Disponible' : 'No disponible'}
                                     </span>
                                 </div>
@@ -157,7 +157,7 @@ export const DetailsVan = () => {
                                 </p>
                             </div>
                             <div className="card border-0 shadow-sm p-4">
-                                <h5 className="fw-bold text-primary mb-3">Condiciones de Alquiler</h5>
+                                <h5 className="fw-bold vandoo-text mb-3">Condiciones de Alquiler</h5>
                                 <ul className="small text-secondary">
                                     <li>Kilometraje ilimitado para reservas de más de 7 días.</li>
                                     <li>Seguro a todo riesgo con franquicia.</li>
