@@ -7,6 +7,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import { differenceInDays, format } from "date-fns";
 import { addBooking } from "../services/bookingServices";
 import { login } from "../services/loginServices";
+import { ModalGalery } from "../components/ModalGalery";
+import { ModalBooking } from "../components/ModalBooking";
+import { ModalSignup } from "../components/ModaelSignup";
 
 export const DetailsVan = () => {
 
@@ -20,6 +23,8 @@ export const DetailsVan = () => {
     const [error, setError] = useState("");
     const [user, setUser] = useState({ email: "", password: "" });
     const [loginLoading, setLoginLoading] = useState(false)
+    const [showGallery, setShowGallery] = useState(false);
+    const [showLoginModal, setShowLoginModal] = useState(false);
     const isLogin = !!store.user
 
     const days = endDate ? differenceInDays(endDate, startDate) : 0;
@@ -116,21 +121,59 @@ export const DetailsVan = () => {
             ) : (
                 <div className="container mt-5 mb-5">
                     <div className="row g-3 mb-4">
-                        <div className="col-md-8">
-                            <img
-                                src={van.media?.[0].url_vehicle}
-                                className="img-fluid rounded-3 shadow-sm w-100"
-                                style={{ height: "450px", objectFit: "cover" }}
-                                alt="Principal"
-                            />
-                        </div>
-                        <div className="col-md-4 d-flex flex-column gap-3">
-                            <img
-                                src={van.media?.[1].url_vehicle}
-                                className="img-fluid rounded-3 shadow-sm h-50"
-                                style={{ objectFit: "cover" }}
-                                alt="Interior 1"
-                            />
+                        <div className="row g-3">
+                            <div className="col-md-8">
+                                {van.media && van.media.length > 0 ? (
+                                    <div className="ratio ratio-16x9 h-100">
+                                        <img
+                                            src={van.media[0].url_vehicle}
+                                            className="rounded-3 shadow-sm object-fit-cover"
+                                            alt="Principal"
+                                            style={{ cursor: "pointer" }}
+                                            onClick={() => setShowGallery(true)}
+                                        />
+                                    </div>
+                                ) : (
+                                    <div className="bg-light d-flex align-items-center justify-content-center rounded-3 h-100 min-vh-50">
+                                        <span className="text-muted">Sin imagen disponible</span>
+                                    </div>
+                                )}
+                            </div>
+                            <div className="col-md-4">
+                                <div className="d-flex flex-column h-100 gap-3">
+                                    {van.media?.slice(1, 3).map((item, index) => (
+                                        <div key={index} className="flex-grow-1">
+                                            {index === 0 ? (
+                                                <div className="ratio ratio-4x3 h-100">
+                                                    <img
+                                                        src={item.url_vehicle}
+                                                        className="rounded-3 shadow-sm object-fit-cover"
+                                                        alt={`Van ${index}`}
+                                                        style={{ cursor: "pointer" }}
+                                                        onClick={() => setShowGallery(true)}
+                                                    />
+                                                </div>
+                                            ) : (
+                                                <div className="row g-2 h-100">
+                                                    {van.media.slice(2, 4).map((smallItem, smallIndex) => (
+                                                        <div className="col-6" key={smallIndex}>
+                                                            <div className="ratio ratio-1x1 h-100">
+                                                                <img
+                                                                    src={smallItem.url_vehicle}
+                                                                    className="rounded-3 shadow-sm object-fit-cover"
+                                                                    alt={`Small ${smallIndex}`}
+                                                                    style={{ cursor: "pointer" }}
+                                                                    onClick={() => setShowGallery(true)}
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className="row">
@@ -217,106 +260,33 @@ export const DetailsVan = () => {
                                 >
                                     {van.available ? 'RESERVAR AHORA' : 'NO DISPONIBLE'}
                                 </button>
-
-                                {/* --------------MODAL CONFRIMACIÓN--------------- */}
-                                <div className="modal fade" id="modalReserva" tabIndex="-1" aria-hidden="true">
-                                    <div className="modal-dialog modal-dialog-centered">
-                                        <div className="modal-content">
-                                            <div className="modal-header">
-                                                <h5 className="modal-title">Confirmar Reserva</h5>
-                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div className="modal-body">
-                                                <p>¿Estás seguro de que deseas reservar la <strong>{van.model}</strong>?</p>
-                                                <ul>
-                                                    <li><strong>Desde:</strong> {startDate?.toLocaleDateString()}</li>
-                                                    <li><strong>Hasta:</strong> {endDate?.toLocaleDateString()}</li>
-                                                </ul>
-                                            </div>
-                                            <div className="modal-footer">
-                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                <button
-                                                    type="button"
-                                                    className="btn btn-primary"
-                                                    onClick={handleBooking}
-                                                    data-bs-dismiss="modal"
-                                                >
-                                                    Confirmar y Pagar
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* ----------------- MODAL INICIAR SECIÓN----------------- */}
-                                <div className="modal fade" id="modalLoginAviso" tabIndex="-1" aria-hidden="true">
-                                    <div className="modal-dialog modal-dialog-centered">
-                                        <div className="modal-content border-0 shadow">
-                                            <div className="modal-header border-0">
-                                                <button type="button" className="btn-close" data-bs-dismiss="modal"></button>
-                                            </div>
-                                            <div className="modal-body text-center px-4 pb-5">
-                                                <i className="fa-solid fa-circle-user fa-4x text-primary mb-3"></i>
-                                                <h4 className="fw-bold">¡Casi listo!</h4>
-                                                <p className="text-muted mb-4">Inicia sesión para finalizar tu reserva.</p>
-
-                                                <form onSubmit={handleSubmit} className="text-start">
-                                                    {error && <div className="alert alert-danger py-2 small">{error}</div>}
-                                                    <div className="mb-3">
-                                                        <label className="form-label small fw-bold">Email</label>
-                                                        <input
-                                                            type="email"
-                                                            className="form-control"
-                                                            name="email"
-                                                            value={user.email}
-                                                            onChange={handleChangeForm}
-                                                            required
-                                                            placeholder="tu@email.com"
-                                                        />
-                                                    </div>
-                                                    <div className="mb-4">
-                                                        <label className="form-label small fw-bold">Contraseña</label>
-                                                        <input
-                                                            type="password"
-                                                            className="form-control"
-                                                            name="password"
-                                                            value={user.password}
-                                                            onChange={handleChangeForm}
-                                                            required
-                                                            placeholder="********"
-                                                        />
-                                                    </div>
-                                                    <button type="submit" className="btn btn-primary w-100 fw-bold py-2" disabled={loading}>
-                                                        {loginLoading ? "Cargando..." : "Entrar y Reservar"}
-                                                    </button>
-                                                </form>
-                                                <div className="signup-login-link mt-3">
-                                                    ¿No tienes cuenta?{" "}
-                                                    <span
-                                                        className="text-primary fw-bold"
-                                                        style={{ cursor: 'pointer', textDecoration: 'underline' }}
-                                                        onClick={() => {
-                                                            const backdrops = document.querySelectorAll('.modal-backdrop');
-                                                            backdrops.forEach(backdrop => backdrop.remove());
-                                                            document.body.style.overflow = 'auto';
-                                                            document.body.classList.remove('modal-open');
-
-                                                            navigate("/signup");
-                                                        }}
-                                                    >
-                                                        Regístrate gratis
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
+
                     </div>
+                    <ModalGalery
+                        isOpen={showGallery}
+                        onClose={() => setShowGallery(false)}
+                        van={van}
+                    />
+                    <ModalBooking
+                        van={van}
+                        startDate={startDate}
+                        endDate={endDate}
+                        handleBooking={handleBooking}
+                        loading={loading}
+                    />
+                    <ModalSignup
+                        show={showLoginModal}
+                        onClose={() => setShowLoginModal(false)}
+                        user={user}
+                        error={error}
+                        loginLoading={loginLoading}
+                        handleSubmit={handleSubmit}
+                        handleChangeForm={handleChangeForm}
+                    />
                 </div>
-            )
-            }
+            )}
         </>
     )
 }
