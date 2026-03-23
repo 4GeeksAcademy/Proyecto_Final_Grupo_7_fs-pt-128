@@ -290,3 +290,11 @@ mapbox-search-box:focus-within {
 .button-container2::-webkit-scrollbar-thumb:hover {
   background: var(--color-sg-green);
 }
+
+.vandoo{
+  background-color: #2d6a4f;
+  color :white;
+}
+.vandoo-text{
+  color:#2d6a4f;
+}
