@@ -1,7 +1,6 @@
 
 const API_URL = import.meta.env.VITE_BACKEND_URL;
 
-// # para obtener la lista completa de puntos (Spots)
 export const getAllSpots = async () => {
     try {
         const response = await fetch(`${API_URL}/spot/spots`);
@@ -27,7 +26,6 @@ export const SpotData = async (dispatch) => {
     }
 };
 
-// # para obtener el detalle de un solo punto por su ID
 export const getSpotById = async (id) => {
     try {
         const response = await fetch(`${API_URL}/spot/spots/${id}`);
@@ -39,7 +37,6 @@ export const getSpotById = async (id) => {
     }
 };
 
-// # Para crear un nuevo punto en la base de datos
 export const createSpot = async (spotData) => {
     const token = localStorage.getItem("token");
 
@@ -70,7 +67,6 @@ export const createSpot = async (spotData) => {
         return null;
     }
 };
-//para añadir una foto al spot
 export const addSpotMedia = async (spotId, imageUrl) => {
     const token = localStorage.getItem("token");
     try {
@@ -92,7 +88,6 @@ export const addSpotMedia = async (spotId, imageUrl) => {
     }
 };
 
-// --- Fetch para comentarios  ---
 
 export const getAllComments = async (spotId = null) => {
     try {
