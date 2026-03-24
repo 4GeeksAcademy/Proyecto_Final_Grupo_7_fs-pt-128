@@ -261,13 +261,68 @@ export const Map = () => {
   }, [location.state, stores, handleOpenDetail]);
 
   return (
-          <div className="map-main-container border-1  overflow-hidden shadow">
-            <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
-              <Sidebar
-                stores={unifiedListForSidebar}
-                setSelectedStore={(store) => {
-                  setSelectedStore(store);
-                  if (mapRef.current && store.longitude && store.latitude) {
+    
+      <div className="map-main-container border-1 rounded-4 overflow-hidden shadow">
+        <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
+          <Sidebar
+            stores={unifiedListForSidebar}
+            setSelectedStore={(store) => {
+              setSelectedStore(store);
+              if (mapRef.current && store.longitude && store.latitude) {
+                mapRef.current.flyTo({
+                  center: [store.longitude, store.latitude],
+                  zoom: 15,
+                  essential: true
+                });
+              }
+            }}
+            onOpenDetail={handleOpenDetail}
+          />
+        </div>
+
+        <div className="map-wrapper" onClick={() => { if (isSidebarOpen) setIsSidebarOpen(false) }}>
+          <div className="button-container">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setFilters(prev => ({ ...prev, community: !prev.community }));
+              }}
+              className={`category-button ${filters.community ? 'active community-active' : ''}`}
+              style={{ backgroundColor: filters.community ? '#2d6a4f' : '#fff', color: filters.community ? '#fff' : '#000', fontWeight: 'bold' }}
+            >
+              👥 Comunidad
+            </button>
+            <div className="separator"></div>
+            {categoryButtons.map(({ label, value }) => (
+              <button
+                key={value}
+                onClick={(e) => { e.stopPropagation(); setSearchCategory(value); }}
+                className={`category-button ${searchCategory === value ? 'active' : ''}`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+
+          <div className="search-center-container">
+            <div className="search-box-wrapper">
+              <SearchBox
+                accessToken={MAPBOX_ACCESS_TOKEN}
+                map={mapRef.current}
+                mapboxgl={mapboxgl}
+                placeholder="Busca una ciudad o dirección..."
+                language="es"
+                onRetrieve={(result) => {
+                  if (result && result.features.length > 0) {
+                    const feature = result.features[0];
+                    const [longitude, latitude] = feature.geometry.coordinates;
+
+                    setSearchMarker({
+                      longitude,
+                      latitude,
+                      address: feature.properties.full_address || feature.properties.name || "Dirección buscada"
+                    });
+
                     mapRef.current.flyTo({
                       center: [store.longitude, store.latitude],
                       zoom: 15,

@@ -54,22 +54,14 @@ export const Navbar = () => {
 										type="button"
 										data-bs-toggle="dropdown"
 										aria-expanded="false"
-										style={{
-											backgroundColor: '#2d6a4f',
-											color: 'white',
-											border: 'none'
-										}}
-						
-										onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#198754'}
-										onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#2d6a4f'}
-
+										data-bs-offset="0,4"
 									>
 										<i className="fa-solid fa-user"></i>
 										{store.user?.user_name}
 									</button>
 
 									<ul
-										className="dropdown-menu dropdown-menu-end mt-2 border-0 p-1"
+										className="dropdown-menu dropdown-menu-end border-0 p-1"
 										style={{
 											backgroundColor: "#1a1a1a",
 											borderRadius: "12px",
@@ -78,8 +70,7 @@ export const Navbar = () => {
 											border: "0.5px solid rgba(255,255,255,0.1) !important"
 										}}
 									>
-										<li className="px-3 py-2">
-										</li>
+										
 										<li>
 											<Link
 												className="dropdown-item d-flex align-items-center gap-2 py-2 rounded-2"
@@ -93,12 +84,10 @@ export const Navbar = () => {
 											</Link>
 										</li>
 
-										{/* Divider */}
 										<li>
 											<hr className="dropdown-divider" style={{ borderColor: "rgba(255,255,255,0.1)" }} />
 										</li>
 
-										{/* Cerrar sesión */}
 										<li>
 											<button
 												className="dropdown-item d-flex align-items-center gap-2 py-2 rounded-2"

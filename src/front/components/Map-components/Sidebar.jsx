@@ -27,7 +27,7 @@ export const Sidebar = ({ stores, selectedStore, setSelectedStore, onOpenDetail 
     }}>
       <header style={{
         padding: '15px',
-        backgroundColor: '#00473C',
+        backgroundColor: '#2d6a4f',
         color: 'white',
         position: 'sticky',
         top: 0,
@@ -59,7 +59,7 @@ export const Sidebar = ({ stores, selectedStore, setSelectedStore, onOpenDetail 
                   padding: '12px',
                   marginBottom: '10px',
                   backgroundColor: isSelected ? '#e6f2f0' : '#ffffff',
-                  border: isSelected ? '2px solid #00473C' : '1px solid #eee',
+                  border: isSelected ? '2px solid #2d6a4f' : '1px solid #eee',
                   borderRadius: '10px',
                   cursor: 'pointer',
                   transition: 'all 0.2s ease',
@@ -81,7 +81,7 @@ export const Sidebar = ({ stores, selectedStore, setSelectedStore, onOpenDetail 
                           <span style={{ color: '#FFB800', fontSize: '0.8rem' }}>
                             {"★".repeat(Math.round(store.rating || 0)) + "☆".repeat(5 - Math.round(store.rating || 0))}
                           </span>
-                          <span style={{ color: '#0f5132', fontSize: '0.7rem', fontWeight: 'bold', backgroundColor: '#d1e7dd', padding: '1px 5px', borderRadius: '3px' }}>
+                          <span style={{ color: '#2d6a4f', fontSize: '0.7rem', fontWeight: 'bold', backgroundColor: '#d1e7dd', padding: '1px 5px', borderRadius: '3px' }}>
                             COMUNIDAD
                           </span>
                         </>
