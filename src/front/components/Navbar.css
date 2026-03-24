@@ -1,0 +1,75 @@
+:root {
+  --vandoo-green: #2d6a4f; 
+  --vandoo-light: #198754;
+}
+.btn-vandoo-primary {
+  background-color: var(--vandoo-green) !important;
+  color: white !important;
+  border: none !important;
+  transition: all 0.3s ease !important;
+}
+
+.btn-vandoo-primary:hover {
+  background-color: var(--vandoo-light) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 71, 60, 0.3);
+}
+
+ .btn-vandoo-outline {
+  background-color: transparent !important;
+  color: white !important;
+  border: 2px solid var(--vandoo-green) !important;
+  transition: all 0.3s ease !important;
+} 
+
+.btn-vandoo-outline:hover {
+  background-color: var(--vandoo-green) !important;
+  color: white !important;
+}
+
+.btn-vandoo-profile, 
+.btn-vandoo-profile:hover, 
+.btn-vandoo-profile:focus, 
+.btn-vandoo-profile:active, 
+.btn-vandoo-profile.show {
+    background-color: #00473C !important; 
+    color: white !important;
+    border: none !important;
+    box-shadow: none !important; 
+}
+
+.btn-vandoo-profile:hover {
+    background-color: #005c4e !important; 
+}
+
+.nav-link-custom {
+  position: relative;
+    color: white !important;
+    text-decoration: none;
+    display: inline-block; 
+    padding-bottom: 4px;
+}
+
+.nav-link-custom:hover {
+  color: white !important;
+}
+
+.nav-link-custom::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--vandoo-green);
+  transition: width 0.3s ease;
+}
+
+.nav-link-custom:hover::after {
+  width: 100%;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(255,255,255,0.1) !important;
+    color: white !important;
+}

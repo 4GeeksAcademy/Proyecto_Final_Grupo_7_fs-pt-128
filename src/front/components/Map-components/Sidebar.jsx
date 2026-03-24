@@ -49,7 +49,6 @@ export const Sidebar = ({ stores, selectedStore, setSelectedStore, onOpenDetail 
           stores.map((store) => {
             const isSelected = selectedStore?.id === store.id;
             
-            // Definimos si es comunidad dentro del map
             const isFromCommunity = store.isCustom || (typeof store.id === 'string' && store.id.startsWith('db-'));
 
             return (
@@ -103,7 +102,6 @@ export const Sidebar = ({ stores, selectedStore, setSelectedStore, onOpenDetail 
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      // Enviamos el store.id completo para que el modal no se pierda
                       onOpenDetail(store.id);
                     }}
                     style={{ 

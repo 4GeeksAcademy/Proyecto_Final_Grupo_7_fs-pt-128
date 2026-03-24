@@ -38,8 +38,8 @@ export const Map = () => {
   });
 
   const handleOpenDetail = useCallback((id) => {
-    console.log("Abriendo detalle para:", id);
     setInfoModalSpotId(id);
+    setIsSidebarOpen(false);
   }, []);
 
   const loadSpots = async () => {
@@ -324,117 +324,171 @@ export const Map = () => {
                     });
 
                     mapRef.current.flyTo({
-                      center: [longitude, latitude],
-                      zoom: 14,
+                      center: [store.longitude, store.latitude],
+                      zoom: 15,
                       essential: true
                     });
                   }
                 }}
-                onClear={() => setSearchMarker(null)}
+                onOpenDetail={handleOpenDetail}
               />
+            </div>
+
+            <div className="map-wrapper" onClick={() => { if (isSidebarOpen) setIsSidebarOpen(false) }}>
+              <div className="button-container">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setFilters(prev => ({ ...prev, community: !prev.community }));
+                  }}
+                  className={`category-button ${filters.community ? 'active community-active' : ''}`}
+                  style={{ backgroundColor: filters.community ? '#00473C' : '#fff', color: filters.community ? '#fff' : '#000', fontWeight: 'bold' }}
+                >
+                  👥 Comunidad
+                </button>
+                <div className="separator"></div>
+                {categoryButtons.map(({ label, value }) => (
+                  <button
+                    key={value}
+                    onClick={(e) => { e.stopPropagation(); setSearchCategory(value); }}
+                    className={`category-button ${searchCategory === value ? 'active' : ''}`}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+
+              <div className="search-center-container">
+                <div className="search-box-wrapper">
+                  <SearchBox
+                    accessToken={MAPBOX_ACCESS_TOKEN}
+                    map={mapRef.current}
+                    mapboxgl={mapboxgl}
+                    placeholder="Busca una ciudad o dirección..."
+                    language="es"
+                    onRetrieve={(result) => {
+                      if (result && result.features.length > 0) {
+                        const feature = result.features[0];
+                        const [longitude, latitude] = feature.geometry.coordinates;
+
+                        setSearchMarker({
+                          longitude,
+                          latitude,
+                          address: feature.properties.full_address || feature.properties.name || "Dirección buscada"
+                        });
+
+                        mapRef.current.flyTo({
+                          center: [longitude, latitude],
+                          zoom: 14,
+                          essential: true
+                        });
+                      }
+                    }}
+                    onClear={() => setSearchMarker(null)}
+                  />
+                </div>
+              </div>
+
+              {showSearchAreaButton && (
+                <button onClick={(e) => { e.stopPropagation(); performCategorySearch(); }} className="search-area-button">
+                  🔎 BUSCAR EN ESTA ZONA
+                </button>
+              )}
+
+              <button className="mobile-list-toggle" onClick={(e) => { e.stopPropagation(); setIsSidebarOpen(true); }}>
+                📋 Ver lista
+              </button>
+
+              <div ref={mapContainerRef} id="map-container" />
+
+              {isMapReady && filteredStores.map((store) => (
+                <Marker
+                  key={`db-${store.spot_id || store.id}`}
+                  map={mapRef.current}
+                  store={store}
+                  onOpenDetail={handleOpenDetail}
+                />
+              ))}
+
+              {isMapReady && !filters.community && searchResults
+                .filter(mapboxItem => !stores.some(dbSpot => dbSpot.name?.toLowerCase() === mapboxItem.properties.name?.toLowerCase()))
+                .map((feature, index) => {
+                  const featureId = feature.id || `ext-${index}`;
+                  return (
+                    <Marker
+                      key={`ext-${featureId}`}
+                      map={mapRef.current}
+                      onOpenDetail={handleOpenDetail}
+                      store={{
+                        spot_id: featureId,
+                        id: featureId,
+                        name: feature.properties.name,
+                        address: feature.properties.full_address || feature.properties.address,
+                        longitude: feature.geometry.coordinates[0],
+                        latitude: feature.geometry.coordinates[1],
+                        category: searchCategory,
+                        rating: 0
+                      }}
+                    />
+                  );
+                })}
+
+              {isMapReady && searchMarker && (() => {
+                const duplicateSpot = stores.find(s => {
+                  const distance = Math.sqrt(
+                    Math.pow(s.longitude - searchMarker.longitude, 2) +
+                    Math.pow(s.latitude - searchMarker.latitude, 2)
+                  );
+                  return distance < 0.0005;
+                });
+
+                return (
+                  <Marker
+                    key="search-location-marker"
+                    map={mapRef.current}
+                    onOpenDetail={() => {
+                      if (duplicateSpot) {
+                        handleOpenDetail(`db-${duplicateSpot.spot_id || duplicateSpot.id}`);
+                      } else {
+                        const newId = `new-search-${Date.now()}`;
+                        setSelectedStore({
+                          id: newId,
+                          name: "",
+                          address: searchMarker.address,
+                          longitude: searchMarker.longitude,
+                          latitude: searchMarker.latitude,
+                          category: searchCategory || "parking"
+                        });
+                        handleOpenDetail(newId);
+                      }
+                    }}
+                    store={{
+                      id: "search-marker",
+                      longitude: searchMarker.longitude,
+                      latitude: searchMarker.latitude,
+                      category: "search_pin",
+                      name: duplicateSpot
+                        ? `📍 Ya guardado: ${duplicateSpot.name}`
+                        : "Nueva ubicación encontrada"
+                    }}
+                  />
+                );
+              })()}
+
+
+
+              {infoModalSpotId && (
+                <SpotDetailModal
+                  spotId={infoModalSpotId}
+                  externalData={selectedSpotData}
+                  onClose={() => setInfoModalSpotId(null)}
+                  onSuccess={loadSpots}
+                  allSpots={stores}
+                  onOpenDetail={handleOpenDetail}
+                />
+              )}
             </div>
           </div>
 
-          {showSearchAreaButton && (
-            <button onClick={(e) => { e.stopPropagation(); performCategorySearch(); }} className="search-area-button">
-              🔎 BUSCAR EN ESTA ZONA
-            </button>
-          )}
-
-          <button className="mobile-list-toggle" onClick={(e) => { e.stopPropagation(); setIsSidebarOpen(true); }}>
-            📋 Ver lista
-          </button>
-
-          <div ref={mapContainerRef} id="map-container" />
-
-          {isMapReady && filteredStores.map((store) => (
-            <Marker
-              key={`db-${store.spot_id || store.id}`}
-              map={mapRef.current}
-              store={store}
-              onOpenDetail={handleOpenDetail}
-            />
-          ))}
-
-          {isMapReady && !filters.community && searchResults
-            .filter(mapboxItem => !stores.some(dbSpot => dbSpot.name?.toLowerCase() === mapboxItem.properties.name?.toLowerCase()))
-            .map((feature, index) => {
-              const featureId = feature.id || `ext-${index}`;
-              return (
-                <Marker
-                  key={`ext-${featureId}`}
-                  map={mapRef.current}
-                  onOpenDetail={handleOpenDetail}
-                  store={{
-                    spot_id: featureId,
-                    id: featureId,
-                    name: feature.properties.name,
-                    address: feature.properties.full_address || feature.properties.address,
-                    longitude: feature.geometry.coordinates[0],
-                    latitude: feature.geometry.coordinates[1],
-                    category: searchCategory,
-                    rating: 0
-                  }}
-                />
-              );
-            })}
-
-          {isMapReady && searchMarker && (() => {
-            const duplicateSpot = stores.find(s => {
-              const distance = Math.sqrt(
-                Math.pow(s.longitude - searchMarker.longitude, 2) +
-                Math.pow(s.latitude - searchMarker.latitude, 2)
-              );
-              return distance < 0.0005;
-            });
-
-            return (
-              <Marker
-                key="search-location-marker"
-                map={mapRef.current}
-                onOpenDetail={() => {
-                  if (duplicateSpot) {
-                    handleOpenDetail(`db-${duplicateSpot.spot_id || duplicateSpot.id}`);
-                  } else {
-                    const newId = `new-search-${Date.now()}`;
-                    setSelectedStore({
-                      id: newId,
-                      name: "",
-                      address: searchMarker.address,
-                      longitude: searchMarker.longitude,
-                      latitude: searchMarker.latitude,
-                      category: searchCategory || "parking"
-                    });
-                    handleOpenDetail(newId);
-                  }
-                }}
-                store={{
-                  id: "search-marker",
-                  longitude: searchMarker.longitude,
-                  latitude: searchMarker.latitude,
-                  category: "search_pin",
-                  name: duplicateSpot
-                    ? `📍 Ya guardado: ${duplicateSpot.name}`
-                    : "Nueva ubicación encontrada"
-                }}
-              />
-            );
-          })()}
-
-
-
-          {infoModalSpotId && (
-            <SpotDetailModal
-              spotId={infoModalSpotId}
-              externalData={selectedSpotData}
-              onClose={() => setInfoModalSpotId(null)}
-              onSuccess={loadSpots}
-              allSpots={stores}
-              onOpenDetail={handleOpenDetail}
-            />
-          )}
-        </div>
-      </div>
-    
   );
 };
