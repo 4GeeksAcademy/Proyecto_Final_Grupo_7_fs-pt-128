@@ -18,8 +18,8 @@ export const Home = () => {
 					backgroundImage: 'linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url("https://i.imgur.com/l3Bb92y.jpeg")',
 					backgroundSize: 'cover',
 					backgroundPosition: 'center',
-					backgroundAttachment: 'fixed', 
-					height: '550px',
+					backgroundAttachment: 'scroll', 
+					minHeight: '60vh',
 					width: '100%'
 				}}>
 				<div className="container my-auto text-center">

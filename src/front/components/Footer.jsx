@@ -64,16 +64,16 @@ export const Footer = () => {
 
                     <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
                         <h5 className="text-uppercase mb-4 fw-bold small">Servicios</h5>
-                        <p><Link to="/map" className="text-white text-decoration-none small">Mapa de Rutas</Link></p>
-                        <p><Link to="/vans" className="text-white text-decoration-none small">Alquiler de Vans</Link></p>
-                        <p><Link to="/blog" className="text-white text-decoration-none small">Guía Camper</Link></p>
+                        <p><Link to="/map" className="nav-link-custom text-decoration-none small">Mapa de Rutas</Link></p>
+                        <p><Link to="/vans" className="nav-link-custom text-decoration-none small">Alquiler de Vans</Link></p>
+                        <p><Link to="/blog" className="nav-link-custom text-decoration-none small">Guía Camper</Link></p>
                     </div>
 
                     <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
                         <h5 className="text-uppercase mb-4 fw-bold small">Ayuda</h5>
                         <p>
                             <span
-                                className="text-white text-decoration-none small"
+                                className="nav-link-custom text-decoration-none small"
                                 style={{ cursor: 'pointer' }}
                                 onClick={() => handleOpenHelp('faq')}
                             >
@@ -82,7 +82,7 @@ export const Footer = () => {
                         </p>
                         <p>
                             <span
-                                className="text-white text-decoration-none small"
+                                className="nav-link-custom text-decoration-none small"
                                 style={{ cursor: 'pointer' }}
                                 onClick={() => handleOpenHelp('terms')}
                             >
@@ -91,7 +91,7 @@ export const Footer = () => {
                         </p>
                         <p>
                             <span
-                                className="text-white text-decoration-none small"
+                                className="nav-link-custom text-decoration-none small"
                                 style={{ cursor: 'pointer' }}
                                 onClick={() => handleOpenHelp('contact')}
                             >
@@ -103,13 +103,13 @@ export const Footer = () => {
                     <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
                         <h5 className="text-uppercase mb-4 fw-bold small">Síguenos</h5>
                         <div className="d-flex justify-content-center justify-content-md-start gap-3">
-                            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="text-white">
+                            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="social-icon">
                                 <i className="fab fa-facebook fa-lg"></i>
                             </a>
-                            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="text-white">
+                            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="social-icon">
                                 <i className="fab fa-instagram fa-lg"></i>
                             </a>
-                            <a href="https://www.x.com" target="_blank" rel="noopener noreferrer" className="text-white">
+                            <a href="https://www.x.com" target="_blank" rel="noopener noreferrer" className="social-icon">
                                 <i className="fab fa-x-twitter fa-lg"></i>
                             </a>
                             

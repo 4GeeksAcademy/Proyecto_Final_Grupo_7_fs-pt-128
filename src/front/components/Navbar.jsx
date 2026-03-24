@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 import { useEffect, useState } from "react";
+import "./Navbar.css";
 
 export const Navbar = () => {
 
@@ -34,25 +35,34 @@ export const Navbar = () => {
 					</button>
 
 					<div className="collapse navbar-collapse" id="navbarSupportedContent">
-						<ul className="navbar-nav mb-2 mb-md-0 d-flex justify-content-center w-100 gap-2 gap-md-5">
+						<ul className="navbar-nav mb-2 mb-md-0 d-flex justify-content-center w-100 gap-2 gap-md-4">
 							<li className="nav-item">
-								<Link className="nav-link text-white" to="/vans">Alquiler</Link>
+								<Link className="nav-link nav-link-custom text-white" to="/vans">Alquiler</Link>
 							</li>
 							<li className="nav-item">
-								<Link className="nav-link text-white" to="/map">Mapa</Link>
+								<Link className="nav-link nav-link-custom text-white" to="/map">Mapa</Link>
 							</li>
 							<li className="nav-item">
-								<Link className="nav-link text-white" to="/blog">Guía</Link>
+								<Link className="nav-link nav-link-custom text-white" to="/blog">Guía</Link>
 							</li>
 						</ul>
-						<div className="d-flex ms-auto">
+						<div className="d-flex ms-auto align-items-center">
 							{isLogin ? (
 								<div className="dropdown">
 									<button
-										className="btn vandoo px-4 py-2 fw-bold rounded-pill dropdown-toggle d-flex align-items-center gap-2"
+										className="btn px-4 py-2 fw-bold rounded-pill dropdown-toggle d-flex align-items-center gap-2"
 										type="button"
 										data-bs-toggle="dropdown"
 										aria-expanded="false"
+										style={{
+											backgroundColor: '#2d6a4f',
+											color: 'white',
+											border: 'none'
+										}}
+						
+										onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#198754'}
+										onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#2d6a4f'}
+
 									>
 										<i className="fa-solid fa-user"></i>
 										{store.user?.user_name}
@@ -106,10 +116,10 @@ export const Navbar = () => {
 							) : (
 								<div className="d-flex gap-2">
 									<Link to="/signup">
-										<button className="btn vandoo py-2 fw-bold rounded-pill">Registrate</button>
+										<button className="btn btn-vandoo-primary py-2 fw-bold rounded-pill">Registrate</button>
 									</Link>
 									<Link to="/login">
-										<button className="btn vandoo py-2 fw-bold rounded-pill">Ingresar</button>
+										<button className="btn btn-vandoo-primary py-2 fw-bold rounded-pill">Ingresar</button>
 									</Link>
 								</div>
 							)}
