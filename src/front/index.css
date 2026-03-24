@@ -321,3 +321,64 @@ mapbox-search-box:focus-within {
     
     transform: translateY(-3px) scale(1.2); 
 }
+
+/*------ LAYOUT ----*/
+
+.vandoo-title-hero {
+    background: linear-gradient(90deg, #00473C 0%, #198754 100%);
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+    position: relative;
+    padding-bottom: 15px;
+    display: inline-block;
+    width: 100%;
+}
+
+.vandoo-title-hero::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background-color: #198754;
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+.vandoo-title-hero {
+    animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/*------ EXPLORE ----*/
+.btn.vandoo {
+    background-color: var(--vandoo-green) !important;
+    color: white !important;
+    border: none !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn.vandoo:hover {
+    background-color: var(--vandoo-light) !important; 
+    color: white !important;
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 12px rgba(0, 71, 60, 0.2);
+}
+
+.btn.vandoo:active {
+    transform: translateY(0);
+    background-color: var(--vandoo-green) !important;
+}

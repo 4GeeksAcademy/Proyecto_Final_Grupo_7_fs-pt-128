@@ -16,11 +16,13 @@ export const AboutUs = () => {
 
     return (
         <>
-            <h2 className="fw-bold text-center display-4">Nacidos para viajar</h2>
-            <div className="row">
+            <h2 className="fw-bold text-center display-4 vandoo-title-hero">
+                Nacidos para viajar
+            </h2>
+            <div className="row align-items-center">
                 <div className="col-12 col-md-4 py-5">
-                    <p className="fs-4" style={{ textAlign: "justify" }}>
-                        <strong>Vandoo</strong> nació de la pasión por la libertad. Somos una comunidad que cree que la mejor forma de conocer el mundo es sobre ruedas. Conectamos viajeros con los mejores rincones y servicios para que tu única preocupación sea disfrutar del paisaje.
+                    <p className="fs-4" style={{ textAlign: "left", lineHeight: "1.6" }}>
+                        <strong style={{ color: '#198754' }}>Vandoo</strong> nació de la pasión por la libertad. Somos una comunidad que cree que la mejor forma de conocer el mundo es sobre ruedas. Conectamos viajeros con los mejores rincones y servicios para que tu única preocupación sea disfrutar del paisaje.
                     </p>
                 </div>
                 <div className="col-12 col-md-8 text-center py-5">

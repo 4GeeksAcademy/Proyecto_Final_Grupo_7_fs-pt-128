@@ -35,8 +35,6 @@ export const Home = () => {
 					Menos hoteles, más estrellas...
 				</p>
 			</div>
-
-			{/* TABS */}
 			<div className="w-100 mt-auto bg-black bg-opacity-25" style={{ backdropFilter: "blur(5px)" }}>
 				<ul className="nav justify-content-center p-2">
 					<li className="nav-item">
