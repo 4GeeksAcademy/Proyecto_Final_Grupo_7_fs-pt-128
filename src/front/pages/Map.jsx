@@ -288,7 +288,7 @@ export const Map = () => {
                 setFilters(prev => ({ ...prev, community: !prev.community }));
               }}
               className={`category-button ${filters.community ? 'active community-active' : ''}`}
-              style={{ backgroundColor: filters.community ? '#00473C' : '#fff', color: filters.community ? '#fff' : '#000', fontWeight: 'bold' }}
+              style={{ backgroundColor: filters.community ? '#2d6a4f' : '#fff', color: filters.community ? '#fff' : '#000', fontWeight: 'bold' }}
             >
               👥 Comunidad
             </button>
