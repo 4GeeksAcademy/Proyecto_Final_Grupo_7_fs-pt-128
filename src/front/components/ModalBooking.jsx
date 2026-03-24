@@ -20,25 +20,28 @@ export const ModalBooking = ({ van, startDate, endDate, handleBooking, loading }
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button
-                                type="button"
-                                className="btn btn-primary"
-                                onClick={handleBooking}
-                                data-bs-dismiss="modal"
-                            >{loading ? (
-                                <div
-                                    className="d-flex flex-column justify-content-center align-items-center"
-                                    style={{ height: "100vh", backgroundColor: "#f8f9fa" }}
-                                >
-                                    <div className="text-success mb-3">
-                                        <i className="fa-solid fa-van-shuttle fa-4x fa-bounce"></i>
+                            <Link to="/user">
+                                <button
+                                    type="button"
+                                    className="btn btn-primary"
+                                    onClick={handleBooking}
+                                    data-bs-dismiss="modal"
+                                >{loading ? (
+                                    <div
+                                        className="d-flex flex-column justify-content-center align-items-center"
+                                        style={{ height: "100vh", backgroundColor: "#f8f9fa" }}
+                                    >
+                                        <div className="text-success mb-3">
+                                            <i className="fa-solid fa-van-shuttle fa-4x fa-bounce"></i>
+                                        </div>
+                                        <h4 className="fw-light text-secondary">Preparando la ruta...</h4>
+                                        <div className="mt-2 text-muted small italic">Verificando tu equipaje...</div>
                                     </div>
-                                    <h4 className="fw-light text-secondary">Preparando la ruta...</h4>
-                                    <div className="mt-2 text-muted small italic">Verificando tu equipaje...</div>
-                                </div>
-                            ) : (
-                                <span>Confirmar y Pagar</span>)}
-                            </button>
+                                ) : (
+
+                                    <span>Confirmar y Pagar</span>)}
+                                </button>
+                            </Link>
                         </div>
                     </div>
                 </div>

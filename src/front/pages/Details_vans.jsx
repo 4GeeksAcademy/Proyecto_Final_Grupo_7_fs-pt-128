@@ -227,6 +227,7 @@ export const DetailsVan = () => {
                                             startDate={startDate}
                                             endDate={endDate}
                                             minDate={new Date()}
+                                            dateFormat="dd/MM/yyyy"
                                             selectsRange
                                             selectsStart
                                             excludeDateIntervals={blockBooking}
@@ -265,6 +266,8 @@ export const DetailsVan = () => {
                         </div>
 
                     </div>
+
+                {/* ---------------MODAL DE CONFIRMAR RESERVA-------------- */}
                     <div className="modal fade" id="modalReserva" tabIndex="-1" aria-hidden="true">
                         <div className="modal-dialog modal-dialog-centered">
                             <div className="modal-content">
@@ -281,6 +284,8 @@ export const DetailsVan = () => {
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <Link to="/user"> 
+                                    
                                     <button
                                         type="button"
                                         className="btn btn-primary"
@@ -289,6 +294,7 @@ export const DetailsVan = () => {
                                     >
                                         Confirmar y Pagar
                                     </button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
