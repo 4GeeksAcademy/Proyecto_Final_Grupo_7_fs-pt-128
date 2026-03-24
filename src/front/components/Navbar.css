@@ -32,14 +32,15 @@
 .btn-vandoo-profile:focus, 
 .btn-vandoo-profile:active, 
 .btn-vandoo-profile.show {
-    background-color: #00473C !important; 
+    background-color: var(--vandoo-green) !important;
     color: white !important;
     border: none !important;
     box-shadow: none !important; 
+    transition: background-color 0.3s ease !important;
 }
 
 .btn-vandoo-profile:hover {
-    background-color: #005c4e !important; 
+    background-color:var(--vandoo-light) !important;
 }
 
 .nav-link-custom {

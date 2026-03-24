@@ -50,7 +50,7 @@ export const Navbar = () => {
 							{isLogin ? (
 								<div className="dropdown">
 									<button
-										className="btn px-4 py-2 fw-bold rounded-pill dropdown-toggle d-flex align-items-center gap-2"
+										className="btn btn-vandoo-profile px-4 py-2 fw-bold rounded-pill dropdown-toggle d-flex align-items-center gap-2"
 										type="button"
 										data-bs-toggle="dropdown"
 										aria-expanded="false"
