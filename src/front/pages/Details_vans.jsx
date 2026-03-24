@@ -9,7 +9,7 @@ import { addBooking } from "../services/bookingServices";
 import { login } from "../services/loginServices";
 import { ModalGalery } from "../components/ModalGalery";
 import { ModalBooking } from "../components/ModalBooking";
-import { ModalSignup } from "../components/ModaelSignup";
+
 
 export const DetailsVan = () => {
 
@@ -260,30 +260,90 @@ export const DetailsVan = () => {
                                 >
                                     {van.available ? 'RESERVAR AHORA' : 'NO DISPONIBLE'}
                                 </button>
+
                             </div>
                         </div>
 
+                    </div>
+                    <div className="modal fade" id="modalReserva" tabIndex="-1" aria-hidden="true">
+                        <div className="modal-dialog modal-dialog-centered">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <h5 className="modal-title">Confirmar Reserva</h5>
+                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div className="modal-body">
+                                    <p>¿Estás seguro de que deseas reservar la <strong>{van.model}</strong>?</p>
+                                    <ul>
+                                        <li><strong>Desde:</strong> {startDate?.toLocaleDateString()}</li>
+                                        <li><strong>Hasta:</strong> {endDate?.toLocaleDateString()}</li>
+                                    </ul>
+                                </div>
+                                <div className="modal-footer">
+                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <button
+                                        type="button"
+                                        className="btn btn-primary"
+                                        onClick={handleBooking}
+                                        data-bs-dismiss="modal"
+                                    >
+                                        Confirmar y Pagar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* ----------------- MODAL INICIAR SECIÓN----------------- */}
+                    <div className="modal fade" id="modalLoginAviso" tabIndex="-1" aria-hidden="true">
+                        <div className="modal-dialog modal-dialog-centered">
+                            <div className="modal-content border-0 shadow">
+                                <div className="modal-header border-0">
+                                    <button type="button" className="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div className="modal-body text-center px-4 pb-5">
+                                    <i className="fa-solid fa-circle-user fa-4x text-primary mb-3"></i>
+                                    <h4 className="fw-bold">¡Casi listo!</h4>
+                                    <p className="text-muted mb-4">Inicia sesión para finalizar tu reserva.</p>
+
+                                    <form onSubmit={handleSubmit} className="text-start">
+                                        {error && <div className="alert alert-danger py-2 small">{error}</div>}
+                                        <div className="mb-3">
+                                            <label className="form-label small fw-bold">Email</label>
+                                            <input
+                                                type="email"
+                                                className="form-control"
+                                                name="email"
+                                                value={user.email}
+                                                onChange={handleChangeForm}
+                                                required
+                                                placeholder="tu@email.com"
+                                            />
+                                        </div>
+                                        <div className="mb-4">
+                                            <label className="form-label small fw-bold">Contraseña</label>
+                                            <input
+                                                type="password"
+                                                className="form-control"
+                                                name="password"
+                                                value={user.password}
+                                                onChange={handleChangeForm}
+                                                required
+                                                placeholder="********"
+                                            />
+                                        </div>
+                                        <button type="submit" className="btn btn-primary w-100 fw-bold py-2" disabled={loading}>
+                                            {loginLoading ? "Cargando..." : "Entrar y Reservar"}
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <ModalGalery
                         isOpen={showGallery}
                         onClose={() => setShowGallery(false)}
                         van={van}
-                    />
-                    <ModalBooking
-                        van={van}
-                        startDate={startDate}
-                        endDate={endDate}
-                        handleBooking={handleBooking}
-                        loading={loading}
-                    />
-                    <ModalSignup
-                        show={showLoginModal}
-                        onClose={() => setShowLoginModal(false)}
-                        user={user}
-                        error={error}
-                        loginLoading={loginLoading}
-                        handleSubmit={handleSubmit}
-                        handleChangeForm={handleChangeForm}
                     />
                 </div>
             )}
