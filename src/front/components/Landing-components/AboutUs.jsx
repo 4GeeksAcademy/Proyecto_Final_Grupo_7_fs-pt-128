@@ -9,9 +9,9 @@ export const AboutUs = () => {
     ];
 
     const Equipo = [
-        { name: "Joset", img: "fa-regular fa-user fa-2xl", text: "Parte del nuestro equipo" },
-        { name: "Santiago", img: "fa-regular fa-user fa-2xl", text: "Parte del nuestro equipo" },
-        { name: "Lorenzo", img: "fa-regular fa-user fa-2xl", text: "Parte del nuestro equipo" }
+        { name: "Joset", img: "https://i.imgur.com/ZFKJFXg.jpeg", text: "El cocinero viajero" },
+        { name: "Santiago", img: "https://i.imgur.com/nMKEXpH.jpeg", text: "El amante de las plantas" },
+        { name: "Lorenzo", img: "https://i.imgur.com/WJNWywB.png", text: "El perro flauta" }
     ]
 
     return (
@@ -35,7 +35,7 @@ export const AboutUs = () => {
             <div className="row mt-5">
                 {Valores.map((item, index) => (
                     <div className="col-12 col-md-4" key={index}>
-                        <div className="card h-100 border-0 shadow">
+                        <div className="card h-100 border shadow">
                             <div className="card-body text-center">
                                 <div className="fs-1 mb-3 vandoo-text">
                                     <i className={`fa-solid ${item.icon}`}></i>
@@ -55,10 +55,10 @@ export const AboutUs = () => {
             <div className="row mt-5">
                 {Equipo.map((item, index) => (
                     <div className="col-12 col-md-4" key={index}>
-                        <div className="card h-100 border-0 shadow">
+                        <div className="card h-100 border shadow">
                             <div className="card-body text-center">
                                 <div className="fs-1 mb-3 vandoo-text">
-                                    <i className={`fa-solid ${item.img}`}></i>
+                                    <img src={item.img} className="img-fluid rounded-circle" style={{ width: '200px', height: '200px', objectFit: 'cover' }} />
                                 </div>
                                 <h5 className="card-title fw-bold">{item.name}</h5>
                                 <p className="card-text text-muted">
