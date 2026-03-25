@@ -200,13 +200,13 @@ export const DetailsVan = () => {
                                     </span>
                                 </div>
                                 <hr />
-                                <h4 className="fw-bold">Descripción</h4>
+                                <h4 className="fw-bold vandoo-text">Descripción</h4>
                                 <p className="text-muted" style={{ lineHeight: "1.8" }}>
                                     {van.description}
                                 </p>
                             </div>
                             <div className="card border-0 shadow-sm p-4">
-                                <h5 className="fw-bold text-primary mb-3">Condiciones de Alquiler</h5>
+                                <h5 className="fw-bold vandoo-text mb-3">Condiciones de Alquiler</h5>
                                 <ul className="small text-secondary">
                                     <li>Kilometraje ilimitado para reservas de más de 7 días.</li>
                                     <li>Seguro a todo riesgo con franquicia.</li>
@@ -248,13 +248,13 @@ export const DetailsVan = () => {
                                 <hr />
                                 <div className="d-flex justify-content-between align-items-center mb-4">
                                     <span className="h5 fw-bold">Total</span>
-                                    <span className="h4 fw-bold text-primary">
+                                    <span className="h4 fw-bold vandoo-text">
                                         {days > 0 ? bookingTotal : parseFloat(van.price_per_day)}€
                                     </span>
                                 </div>
 
                                 <button
-                                    className="btn btn-primary btn-lg w-100 fw-bold py-3 mb-3 shadow"
+                                    className="btn vandoo btn-lg w-100 fw-bold py-3 mb-3 shadow"
                                     disabled={!van.available || (isLogin && !endDate)}
                                     data-bs-toggle="modal"
                                     data-bs-target={isLogin ? "#modalReserva" : "#modalLoginAviso"}
@@ -283,12 +283,11 @@ export const DetailsVan = () => {
                                     </ul>
                                 </div>
                                 <div className="modal-footer">
-                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    {/* <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Cancelar</button> */}
                                     <Link to="/user"> 
-                                    
                                     <button
                                         type="button"
-                                        className="btn btn-primary"
+                                        className="btn vandoo"
                                         onClick={handleBooking}
                                         data-bs-dismiss="modal"
                                     >
@@ -301,14 +300,14 @@ export const DetailsVan = () => {
                     </div>
 
                     {/* ----------------- MODAL INICIAR SECIÓN----------------- */}
-                    <div className="modal fade" id="modalLoginAviso" tabIndex="-1" aria-hidden="true">
+                    <div className="modal-overlay modal fade" id="modalLoginAviso" tabIndex="-1" aria-hidden="true">
                         <div className="modal-dialog modal-dialog-centered">
                             <div className="modal-content border-0 shadow">
                                 <div className="modal-header border-0">
                                     <button type="button" className="btn-close" data-bs-dismiss="modal"></button>
                                 </div>
                                 <div className="modal-body text-center px-4 pb-5">
-                                    <i className="fa-solid fa-circle-user fa-4x text-primary mb-3"></i>
+                                    <i className="userpage-avatar fa-solid fa-circle-user fa-4x mx-auto mb-3"></i>
                                     <h4 className="fw-bold">¡Casi listo!</h4>
                                     <p className="text-muted mb-4">Inicia sesión para finalizar tu reserva.</p>
 
@@ -338,7 +337,7 @@ export const DetailsVan = () => {
                                                 placeholder="********"
                                             />
                                         </div>
-                                        <button type="submit" className="btn btn-primary w-100 fw-bold py-2" disabled={loading}>
+                                        <button type="submit" className="btn vandoo w-100 fw-bold py-2" disabled={loading}>
                                             {loginLoading ? "Cargando..." : "Entrar y Reservar"}
                                         </button>
                                     </form>

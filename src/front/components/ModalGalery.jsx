@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export const ModalGalery = ({isOpen, onClose, van}) => {
+export const ModalGalery = ({ isOpen, onClose, van }) => {
     if (!isOpen) return null
     return (
         <>
@@ -51,10 +51,10 @@ export const ModalGalery = ({isOpen, onClose, van}) => {
                         </div>
                         <button
                             onClick={onClose}
-                            className="btn btn-danger position-absolute top-0 end-0 m-3"
+                            className="btn position-absolute top-0 end-0 m-3"
                             style={{ zIndex: 1100 }}
                         >
-                            X
+                            <i class="fa-solid fa-circle-xmark fa-xl" style={{ color: "red" }}></i>
                         </button>
 
                     </div>
